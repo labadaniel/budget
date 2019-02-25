@@ -1,9 +1,16 @@
 #include <iostream>
+#include "UserManager.h"
 
 using namespace std;
 
 int main()
 {
-    cout << "Hello world!" << endl;
+    UserManager userManager;
+
+    while(1){
+        userManager.signInUser();
+
+        userManager.showAllUser();
+    }
     return 0;
 }
