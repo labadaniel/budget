@@ -2,6 +2,8 @@
 #define USERMANAGER_H
 #include <iostream>
 #include <vector>
+#include <algorithm>
+
 
 #include "User.h"
 
@@ -22,5 +24,6 @@ public:
     };
     void showAllUser();
     void signInUser();
+    void logInUser();
 };
 #endif

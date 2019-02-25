@@ -7,10 +7,12 @@ int main()
 {
     UserManager userManager;
 
-    while(1){
+
         userManager.signInUser();
 
-        userManager.showAllUser();
-    }
+        userManager.logInUser();
+
+
+
     return 0;
 }
