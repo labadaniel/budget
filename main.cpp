@@ -7,15 +7,13 @@ int main()
 {
     UserManager userManager;
 
+    /*userManager.signInUser();
+    userManager.signInUser();*/
 
-        userManager.signInUser();
-
-        userManager.logInUser();
-        userManager.showAllUser();
-        userManager.changeLoggedUserPassword();
-
-        userManager.showAllUser();
-
+    userManager.showAllUser();
+    userManager.logInUser();
+    userManager.changeLoggedUserPassword();
+    userManager.showAllUser();
 
     return 0;
 }

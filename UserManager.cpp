@@ -2,8 +2,8 @@
 
 void UserManager::signInUser() {
     User user = inputNewUserData();
-
     users.push_back(user);
+    fileWithUsers.addUserToFile(user);
 }
 
 User UserManager::inputNewUserData() {
@@ -103,5 +103,6 @@ void UserManager::changeLoggedUserPassword(){
             cout << "Haslo zostalo zmienione." << endl;
             system("pause");
         }
+        fileWithUsers.saveAllUserToFile(users);
     }
 }
