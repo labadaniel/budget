@@ -11,7 +11,10 @@ int main()
         userManager.signInUser();
 
         userManager.logInUser();
+        userManager.showAllUser();
+        userManager.changeLoggedUserPassword();
 
+        userManager.showAllUser();
 
 
     return 0;

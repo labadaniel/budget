@@ -25,5 +25,6 @@ public:
     void showAllUser();
     void signInUser();
     void logInUser();
+    void changeLoggedUserPassword();
 };
 #endif

@@ -90,6 +90,18 @@ void UserManager::logInUser(){
     cout << "Nie ma uzytkownika z takim loginem" << endl << endl;
     system("pause");
     return;
+}
 
+void UserManager::changeLoggedUserPassword(){
+    string noweHaslo = "";
+    cout << "Podaj nowe haslo: ";
+    cin >> noweHaslo;
 
+    for (int i = 0; i < users.size(); i++){
+        if(users[i].getUserId() == idLoggedInUser){
+            users[i].setPassword(noweHaslo);
+            cout << "Haslo zostalo zmienione." << endl;
+            system("pause");
+        }
+    }
 }
