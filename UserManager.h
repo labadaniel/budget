@@ -7,6 +7,7 @@
 #include "User.h"
 #include "FileWithUsers.h"
 
+
 using namespace std;
 
 class UserManager {
@@ -26,6 +27,7 @@ public:
     void signInUser();
     void logInUser();
     void changeLoggedUserPassword();
-
+    int getLoggedInUserId();
+    bool isUserLoggedIn();
 };
 #endif

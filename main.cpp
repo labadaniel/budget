@@ -1,19 +1,21 @@
 #include <iostream>
-#include "UserManager.h"
+#include "Budget.h"
+
 
 using namespace std;
 
 int main()
 {
-    UserManager userManager;
+    Budget budget;
 
-    /*userManager.signInUser();
-    userManager.signInUser();*/
+    budget.showAllUser();
+    budget.logInUser();
+    budget.addIncome();
+    budget.addIncome();
 
-    userManager.showAllUser();
-    userManager.logInUser();
-    userManager.changeLoggedUserPassword();
-    userManager.showAllUser();
+    budget.showUserIncomes();
+
+
 
     return 0;
 }

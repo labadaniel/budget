@@ -106,3 +106,16 @@ void UserManager::changeLoggedUserPassword(){
         fileWithUsers.saveAllUserToFile(users);
     }
 }
+
+int UserManager::getLoggedInUserId(){
+    return idLoggedInUser;
+}
+
+bool UserManager::isUserLoggedIn(){
+    if (idLoggedInUser > 0)
+        return true;
+    else
+        return false;
+}
+
+
