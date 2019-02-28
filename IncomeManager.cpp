@@ -56,18 +56,23 @@ void IncomeManager::inputDataWithUserDate(){
 
     cout << "Podaj date (rrrr-mm-dd) pod ktora wpisac wplate: ";
     cin >> date;
-    cout << "Podaj wartosc przychodu: ";
-    cin >> amount;
-    cout << "Podaj rodzaj wplaty: ";
-    cin >> item;
+    if(checkFormatUserDate(date)){
+        cout << "Podaj wartosc przychodu: ";
+        cin >> amount;
+        cout << "Podaj rodzaj wplaty: ";
+        cin >> item;
 
-    income.setDate(date);
-    income.setIncomeId(getIncomeId());
-    income.setUserId(ID_LOGGED_IN_USER);
-    income.setAmount(amount);
-    income.setItem(item);
+        income.setDate(date);
+        income.setIncomeId(getIncomeId());
+        income.setUserId(ID_LOGGED_IN_USER);
+        income.setAmount(amount);
+        income.setItem(item);
 
-    incomes.push_back(income);
+        incomes.push_back(income);
+    }
+    else
+        cout << "Podano niepoprawna date!" << endl;
+        system("pause");
 }
 
 void IncomeManager::showUserIncomes(){
@@ -78,6 +83,28 @@ void IncomeManager::showUserIncomes(){
         cout << "wartosc: " << incomes[i].getAmount() << endl;
         cout << "rodzaj wplaty: " << incomes[i].getItem() << endl;
     }
+}
+
+int IncomeManager::howManyDaysInMonth(int month, int year) {
+    if (month == 4 || month == 6 || month == 9 || month == 11)
+        return 30;
+    else if (month == 2) {
+        bool isLeapYear = (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
+        if (isLeapYear)
+            return 29;
+        else
+            return 28;
+    } else
+        return 31;
+}
+
+bool IncomeManager::checkFormatUserDate(string date){
+    string year, month, day;
+    char sign = '-';
+    if(date.length() == 10)
+        if((date[4] && date[7]) == sign)
+            return 1;
+    return 0;
 }
 
 
