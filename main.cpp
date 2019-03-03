@@ -11,7 +11,7 @@ int main()
     budget.showAllUser();
     budget.logInUser();
     budget.addIncome();
-    budget.addIncome();
+
 
     budget.showUserIncomes();
 

@@ -33,8 +33,11 @@ int IncomeManager::getIncomeId() {
 void IncomeManager::inputDataWithTodayDate(){
     double amount;
     string item;
+    string date;
+    date = SupportMetod::getCurrentTime();
+    date = SupportMetod::convertUserDateToDateWithNoMinusSign(date);
 
-    income.setDate(SupportMetod::getCurrentTime());
+    income.setDate(SupportMetod::convertStringToInt(date));
     income.setIncomeId(getIncomeId());
     income.setUserId(ID_LOGGED_IN_USER);
     cout << "Podaj wartosc przychodu: ";
@@ -49,31 +52,39 @@ void IncomeManager::inputDataWithTodayDate(){
 }
 
 void IncomeManager::inputDataWithUserDate(){
-
-    string date;
     double amount;
     string item;
 
     cout << "Podaj date (rrrr-mm-dd) pod ktora wpisac wplate: ";
     cin >> date;
-    if(checkFormatUserDate(date)){
-        cout << "Podaj wartosc przychodu: ";
-        cin >> amount;
-        cout << "Podaj rodzaj wplaty: ";
-        cin >> item;
 
-        income.setDate(date);
-        income.setIncomeId(getIncomeId());
-        income.setUserId(ID_LOGGED_IN_USER);
-        income.setAmount(amount);
-        income.setItem(item);
+        if(checkFormatUserDate() && checkCorrectDate()){
+            date = SupportMetod::convertUserDateToDateWithNoMinusSign(date);
+            if(checkLastDayFromUserInputDay(date)){
+                cout << "Podaj wartosc przychodu: ";
+                cin >> amount;
+                cout << "Podaj rodzaj wplaty: ";
+                cin >> item;
 
-        incomes.push_back(income);
-    }
-    else
-        cout << "Podano niepoprawna date!" << endl;
-        system("pause");
+                income.setDate(SupportMetod::convertStringToInt(date));
+                income.setIncomeId(getIncomeId());
+                income.setUserId(ID_LOGGED_IN_USER);
+                income.setAmount(amount);
+                income.setItem(item);
+                incomes.push_back(income);
+            }
+            else{
+                cout << "Podano date wykraczajaca poza biezacy miesiac." << endl;
+                system("pause");
+            }
+        }
+        else {
+            cout << "Podano niepoprawna date!" << endl;
+            system("pause");
+        }
 }
+
+
 
 void IncomeManager::showUserIncomes(){
     for(int i = 0; i<incomes.size(); i++){
@@ -83,6 +94,36 @@ void IncomeManager::showUserIncomes(){
         cout << "wartosc: " << incomes[i].getAmount() << endl;
         cout << "rodzaj wplaty: " << incomes[i].getItem() << endl;
     }
+}
+
+bool IncomeManager::checkCorrectDate() {
+
+    int year, month, day;
+    year = SupportMetod::splitDate(date, 0, 4);
+    month = SupportMetod::splitDate(date, 5, 7);
+    day = SupportMetod::splitDate(date, 8, 10);
+
+        if(day > 31)
+            return false;
+        else if ((month == 4 || month == 6 || month == 9 || month == 11) && day <=30)
+            return true;
+        else if (month == 2) {
+            bool isLeapYear = ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0));
+            if (isLeapYear && day <=29)
+                return true;
+            else if(day <=28)
+                return true;
+            else
+                return false;
+        } else
+            return true;
+}
+
+bool IncomeManager::checkFormatUserDate(){
+    char sign = '-';
+    if(date.length() == 10)
+        if(date[4] == sign && date[7] == sign)
+            return 1;
 }
 
 int IncomeManager::howManyDaysInMonth(int month, int year) {
@@ -98,13 +139,46 @@ int IncomeManager::howManyDaysInMonth(int month, int year) {
         return 31;
 }
 
-bool IncomeManager::checkFormatUserDate(string date){
-    string year, month, day;
-    char sign = '-';
-    if(date.length() == 10)
-        if((date[4] && date[7]) == sign)
-            return 1;
-    return 0;
+
+bool IncomeManager::checkLastDayFromUserInputDay(string userDate){
+    int fromDate = 20000101;
+    int toLastDateCurrentMonth = 0;
+    int tmpUserDate;
+
+    toLastDateCurrentMonth = SupportMetod::convertStringToInt(getCurrentDateWithLastDayOfMonth());
+    tmpUserDate = SupportMetod::convertStringToInt(userDate);
+
+    if(tmpUserDate >= fromDate && tmpUserDate <= toLastDateCurrentMonth)
+        return true;
+    else
+        return false;
+}
+
+string IncomeManager::getCurrentDateWithLastDayOfMonth(){
+    int currentMonth = 0;
+    int currentYear = 0;
+    int amountDaysInCurrentMonth =0;
+    string date;
+    string tmpCurrentMonth = "";
+    string tmpCurrentYear = "";
+    string tmpLastDayInCurrentMonth = "";
+
+    date = SupportMetod::getCurrentTime();
+    date = SupportMetod::convertUserDateToDateWithNoMinusSign(date);
+
+    for (int i=0; i<date.length(); i++ ){
+        if(i <= 3)
+            tmpCurrentYear += date[i];
+        else if (i > 3 && i <=5)
+            tmpCurrentMonth += date[i];
+    }
+    currentMonth = SupportMetod::convertStringToInt(tmpCurrentMonth);
+    currentYear = SupportMetod::convertStringToInt(tmpCurrentYear);
+    amountDaysInCurrentMonth = howManyDaysInMonth(currentMonth, currentYear);
+    tmpLastDayInCurrentMonth = SupportMetod::convertIntToString(amountDaysInCurrentMonth);
+    string fullDate = tmpCurrentYear + tmpCurrentMonth + tmpLastDayInCurrentMonth;
+
+    return fullDate;
 }
 
 
