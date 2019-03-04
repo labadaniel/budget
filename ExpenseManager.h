@@ -35,9 +35,7 @@ public:
     void addExpense();
     void showUserExpensesCurrentMonth();
     void showUserExpensesPreviouseMonth();
-
+    int getSumOfExpenses();
 };
-
-
 #endif
 

@@ -113,8 +113,6 @@ void IncomeManager::showUserIncomesPreviouseMonth(){
     }cout << endl << "Suma przychodow wynosi: " << sumOfIncomes << "zl " << endl;
 }
 
-
-
 bool IncomeManager::checkCorrectDate() {
 
     int year, month, day;
@@ -143,6 +141,10 @@ bool IncomeManager::checkFormatUserDate(){
     if(date.length() == 10)
         if(date[4] == sign && date[7] == sign)
             return 1;
+}
+
+int IncomeManager::getSumOfIncomes(){
+    return sumOfIncomes;
 }
 
 

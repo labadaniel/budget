@@ -36,6 +36,7 @@ public:
     void addExpense();
     void showUserExpensesCurrentMonth();
     void showUserExpensesPreviouseMonth();
+    void checkBalance();
 };
 
 

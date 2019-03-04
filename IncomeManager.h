@@ -19,7 +19,6 @@ class IncomeManager
     FileWithIncome fileWithIncome;
     string date;
     int sumOfIncomes;
-
     Income income;
     const int ID_LOGGED_IN_USER;
     void inputDataWithTodayDate();
@@ -35,9 +34,6 @@ public:
     void addIncome();
     void showUserIncomesCurrentMonth();
     void showUserIncomesPreviouseMonth();
-
-
+    int getSumOfIncomes();
 };
-
-
 #endif

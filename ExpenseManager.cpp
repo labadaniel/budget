@@ -156,6 +156,10 @@ void ExpenseManager::showUserExpensesPreviouseMonth(){
     }cout << endl << "Suma wydatkow wynosi: " << sumOfExpenses << "zl " << endl;
 }
 
+int ExpenseManager::getSumOfExpenses(){
+    return sumOfExpenses;
+}
+
 
 
 

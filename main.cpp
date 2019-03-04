@@ -17,6 +17,7 @@ int main()
 
     budget.showUserIncomesCurrentMonth();
     budget.showUserExpensesCurrentMonth();
+    budget.checkBalance();
 
     //budget.showUserIncomesPreviouseMonth();
 

@@ -42,3 +42,7 @@ void Budget::showUserExpensesCurrentMonth(){
 void Budget::showUserExpensesPreviouseMonth(){
     expenseManager -> showUserExpensesPreviouseMonth();
 }
+
+void Budget::checkBalance(){
+    cout << endl << "Balance dla przychodow do wydatkow wynosi: " << incomeManager -> getSumOfIncomes() - expenseManager -> getSumOfExpenses() << "zl. " << endl;
+}
