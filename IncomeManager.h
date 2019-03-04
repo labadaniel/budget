@@ -18,6 +18,7 @@ class IncomeManager
     vector <Income> incomes;
     FileWithIncome fileWithIncome;
     string date;
+    int sumOfIncomes;
 
     Income income;
     const int ID_LOGGED_IN_USER;
@@ -25,13 +26,7 @@ class IncomeManager
     void inputDataWithUserDate();
     bool checkCorrectDate();
     bool checkFormatUserDate();
-    int howManyDaysInMonth(int month, int year);
     bool checkLastDayFromUserInputDay (string userDate);
-    string getCurrentDateWithLastDayOfMonth();
-    string getCurrentDateWithFirstDayOfMonth();
-    string getPreviouseMonthWithLastDayOfMonth();
-    string getPreviouseMonthWithFirstDayOfMonth();
-    static bool sortDate (Income lhs, Income rhs);
 
 public:
     IncomeManager(int idLoggedUser):ID_LOGGED_IN_USER(idLoggedUser){
@@ -40,6 +35,7 @@ public:
     void addIncome();
     void showUserIncomesCurrentMonth();
     void showUserIncomesPreviouseMonth();
+
 
 };
 

@@ -4,6 +4,7 @@
 #include <vector>
 #include <windows.h>
 #include <stdio.h>
+#include <algorithm>
 
 #include "SupportMetod.h"
 #include "Expense.h"
@@ -17,6 +18,7 @@ class ExpenseManager
     vector <Expense> expenses;
     FileWithExpense fileWithExpense;
     string date;
+    int sumOfExpenses;
 
     Expense expense;
     const int ID_LOGGED_IN_USER;
@@ -24,16 +26,15 @@ class ExpenseManager
     void inputDataWithUserDate();
     bool checkCorrectDate();
     bool checkFormatUserDate();
-    int howManyDaysInMonth(int month, int year);
     bool checkLastDayFromUserInputDay (string userDate);
-    string getCurrentDateWithLastDayOfMonth();
 
 public:
     ExpenseManager(int idLoggedUser):ID_LOGGED_IN_USER(idLoggedUser){
         expenses = fileWithExpense.loadExpenseFromFile(ID_LOGGED_IN_USER);
     };
     void addExpense();
-    void showUserExpenses();
+    void showUserExpensesCurrentMonth();
+    void showUserExpensesPreviouseMonth();
 
 };
 

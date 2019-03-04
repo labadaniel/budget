@@ -34,7 +34,8 @@ public:
     void showUserIncomesCurrentMonth();
     void showUserIncomesPreviouseMonth();
     void addExpense();
-    void showUserExpenses();
+    void showUserExpensesCurrentMonth();
+    void showUserExpensesPreviouseMonth();
 };
 
 

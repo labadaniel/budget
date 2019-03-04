@@ -16,7 +16,9 @@ int main()
 
 
     budget.showUserIncomesCurrentMonth();
-    budget.showUserIncomesPreviouseMonth();
+    budget.showUserExpensesCurrentMonth();
+
+    //budget.showUserIncomesPreviouseMonth();
 
 
     return 0;

@@ -82,18 +82,6 @@ void ExpenseManager::inputDataWithUserDate(){
         }
 }
 
-
-
-void ExpenseManager::showUserExpenses(){
-    for(int i = 0; i<expenses.size(); i++){
-        cout << "data: " << expenses[i].getDate() << endl;
-        cout << "id wyplaty: " << expenses[i].getExpenseId() << endl;
-        cout << "id uzytkownika: " << expenses[i].getUserId() << endl;
-        cout << "wartosc: " << expenses[i].getAmount() << endl;
-        cout << "rodzaj wyplaty: " << expenses[i].getItem() << endl;
-    }
-}
-
 bool ExpenseManager::checkCorrectDate() {
 
     int year, month, day;
@@ -124,26 +112,12 @@ bool ExpenseManager::checkFormatUserDate(){
             return 1;
 }
 
-int ExpenseManager::howManyDaysInMonth(int month, int year) {
-    if (month == 4 || month == 6 || month == 9 || month == 11)
-        return 30;
-    else if (month == 2) {
-        bool isLeapYear = (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
-        if (isLeapYear)
-            return 29;
-        else
-            return 28;
-    } else
-        return 31;
-}
-
-
 bool ExpenseManager::checkLastDayFromUserInputDay(string userDate){
     int fromDate = 20000101;
     int toLastDateCurrentMonth = 0;
     int tmpUserDate;
 
-    toLastDateCurrentMonth = SupportMetod::convertStringToInt(getCurrentDateWithLastDayOfMonth());
+    toLastDateCurrentMonth = SupportMetod::convertStringToInt(SupportMetod::getCurrentDateWithLastDayOfMonth());
     tmpUserDate = SupportMetod::convertStringToInt(userDate);
 
     if(tmpUserDate >= fromDate && tmpUserDate <= toLastDateCurrentMonth)
@@ -152,32 +126,37 @@ bool ExpenseManager::checkLastDayFromUserInputDay(string userDate){
         return false;
 }
 
-string ExpenseManager::getCurrentDateWithLastDayOfMonth(){
-    int currentMonth = 0;
-    int currentYear = 0;
-    int amountDaysInCurrentMonth =0;
-    string date;
-    string tmpCurrentMonth = "";
-    string tmpCurrentYear = "";
-    string tmpLastDayInCurrentMonth = "";
+void ExpenseManager::showUserExpensesCurrentMonth(){
 
-    date = SupportMetod::getCurrentTime();
-    date = SupportMetod::convertUserDateToDateWithNoMinusSign(date);
+    sumOfExpenses = 0;
+    sort(expenses.begin(), expenses.end(), SupportMetod::sortDateExpense);
+    cout << endl << "-----WYDATKI - MIESIAC BIEZACY-----" << endl << endl;
+    for(int i = 0; i<expenses.size(); i++){
+        if(expenses[i].getDate() <= SupportMetod::convertStringToInt(SupportMetod::getCurrentDateWithLastDayOfMonth()) &&
+        expenses[i].getDate() >= SupportMetod::convertStringToInt(SupportMetod::getCurrentDateWithFirstDayOfMonth())){
+            cout << expenses[i].getDate() << " " << expenses[i].getAmount() << "zl " << expenses[i].getItem() << endl;
+            sumOfExpenses += expenses[i].getAmount();
+        }
 
-    for (int i=0; i<date.length(); i++ ){
-        if(i <= 3)
-            tmpCurrentYear += date[i];
-        else if (i > 3 && i <=5)
-            tmpCurrentMonth += date[i];
-    }
-    currentMonth = SupportMetod::convertStringToInt(tmpCurrentMonth);
-    currentYear = SupportMetod::convertStringToInt(tmpCurrentYear);
-    amountDaysInCurrentMonth = howManyDaysInMonth(currentMonth, currentYear);
-    tmpLastDayInCurrentMonth = SupportMetod::convertIntToString(amountDaysInCurrentMonth);
-    string fullDate = tmpCurrentYear + tmpCurrentMonth + tmpLastDayInCurrentMonth;
+    }cout << endl << "Suma wydatkow wynosi: " << sumOfExpenses << "zl " << endl;
 
-    return fullDate;
 }
+
+void ExpenseManager::showUserExpensesPreviouseMonth(){
+
+    sumOfExpenses = 0;
+    sort(expenses.begin(), expenses.end(), SupportMetod::sortDateExpense);
+    cout << endl << "-----WYDATKI - MIESIAC POPRZEDNI-----" << endl << endl;
+    for(int i = 0; i<expenses.size(); i++){
+        if(expenses[i].getDate() <= SupportMetod::convertStringToInt(SupportMetod::getPreviouseMonthWithLastDayOfMonth()) &&
+        expenses[i].getDate() >= SupportMetod::convertStringToInt(SupportMetod::getPreviouseMonthWithFirstDayOfMonth())){
+            cout << expenses[i].getDate() << " " << expenses[i].getAmount() << "zl " << expenses[i].getItem() << endl;
+            sumOfExpenses += expenses[i].getAmount();
+        }
+    }cout << endl << "Suma wydatkow wynosi: " << sumOfExpenses << "zl " << endl;
+}
+
+
 
 
 

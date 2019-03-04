@@ -35,6 +35,10 @@ void Budget::addExpense(){
     expenseManager -> addExpense();
 }
 
-void Budget::showUserExpenses(){
-    expenseManager -> showUserExpenses();
+void Budget::showUserExpensesCurrentMonth(){
+    expenseManager -> showUserExpensesCurrentMonth();
+}
+
+void Budget::showUserExpensesPreviouseMonth(){
+    expenseManager -> showUserExpensesPreviouseMonth();
 }
