@@ -1,27 +1,28 @@
-#ifndef FILEWITHINCOME_H
-#define FILEWITHINCOME_H
+#ifndef FILEWITHEXPENSE_H
+#define FILEWITHEXPENSE_H
 #include <iostream>
 #include <vector>
 
 #include "Markup.h"
-#include "Income.h"
+#include "Expense.h"
 
 using namespace std;
 
-class FileWithIncome {
+class FileWithExpense {
 
-    string fileWithIncome;
-    int incomeId;
+    string fileWithExpense;
+    int expenseId;
 
 public:
 
-    FileWithIncome(){
-        fileWithIncome = "Incomes.xml";
-        incomeId = 0;
+    FileWithExpense(){
+        fileWithExpense = "Expenses.xml";
+        expenseId = 1;
     };
-    int getIncomeId();
-    void addIncomeToFile(Income income);
-    vector <Income> loadIncomeFromFile(int ID_LOGGED_IN_USER);
+    int getExpenseId();
+    void addExpenseToFile(Expense expense);
+    vector <Expense> loadExpenseFromFile(int ID_LOGGED_IN_USER);
 };
 
 #endif
+

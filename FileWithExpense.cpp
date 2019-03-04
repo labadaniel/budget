@@ -1,52 +1,53 @@
-#include "FileWithIncome.h"
+#include "FileWithExpense.h"
 
 
-void FileWithIncome::addIncomeToFile(Income income) {
+void FileWithExpense::addExpenseToFile(Expense expense) {
     CMarkup fileXml;
 
-    fileXml.Load(fileWithIncome);
+    fileXml.Load(fileWithExpense);
 
 
-    while(fileXml.FindElem("income"))
+    while(fileXml.FindElem("expense"))
         fileXml.OutOfElem();
 
-    fileXml.AddElem("income");
+    fileXml.AddElem("expense");
     fileXml.IntoElem();
-    fileXml.AddElem("incomeId", income.getIncomeId());
-    fileXml.AddElem("userId", income.getUserId());
-    fileXml.AddElem("date", income.getDate());
-    fileXml.AddElem("item", income.getItem());
-    fileXml.AddElem("amount", income.getAmount());
-    fileXml.Save(fileWithIncome);
+    fileXml.AddElem("expenseId", expense.getExpenseId());
+    fileXml.AddElem("userId", expense.getUserId());
+    fileXml.AddElem("date", expense.getDate());
+    fileXml.AddElem("item", expense.getItem());
+    fileXml.AddElem("amount", expense.getAmount());
+    fileXml.Save(fileWithExpense);
 }
 
-vector <Income> FileWithIncome::loadIncomeFromFile(int ID_LOGGED_IN_USER) {
-    vector <Income> incomes;
-    Income income;
+vector <Expense> FileWithExpense::loadExpenseFromFile(int ID_LOGGED_IN_USER) {
+    vector <Expense> expenses;
+    Expense expense;
     CMarkup xml;
 
-    xml.Load(fileWithIncome);
+    xml.Load(fileWithExpense);
 
-    while (xml.FindElem("income")) {
+    while (xml.FindElem("expense")) {
         xml.IntoElem();
-        xml.FindElem("incomeId");
-        income.setIncomeId( atoi( MCD_2PCSZ(xml.GetData())));
+        xml.FindElem("expenseId");
+        expense.setExpenseId( atoi( MCD_2PCSZ(xml.GetData())));
         xml.FindElem("userId");
-        income.setUserId( atoi( MCD_2PCSZ(xml.GetData())));
+        expense.setUserId( atoi( MCD_2PCSZ(xml.GetData())));
         xml.FindElem("date");
-        income.setDate( atoi( MCD_2PCSZ(xml.GetData())));
+        expense.setDate( atoi( MCD_2PCSZ(xml.GetData())));
         xml.FindElem("item");
-        income.setItem(xml.GetData());
+        expense.setItem(xml.GetData());
         xml.FindElem("amount");
-        income.setAmount( atoi( MCD_2PCSZ(xml.GetData())));
-        incomeId++;
-        if (income.getUserId() == ID_LOGGED_IN_USER)
-            incomes.push_back(income);
+        expense.setAmount( atoi( MCD_2PCSZ(xml.GetData())));
+        expenseId++;
+        if (expense.getUserId() == ID_LOGGED_IN_USER)
+            expenses.push_back(expense);
         xml.OutOfElem();
     }
-    return incomes;
+    return expenses;
 }
 
-int FileWithIncome::getIncomeId(){
-    return incomeId;
+int FileWithExpense::getExpenseId(){
+    return expenseId;
 }
+

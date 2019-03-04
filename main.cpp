@@ -11,10 +11,12 @@ int main()
     budget.showAllUser();
     budget.logInUser();
 
+    budget.addIncome();
+    budget.addExpense();
 
 
     budget.showUserIncomes();
-    //budget.addIncome();
+    budget.showUserExpenses();
 
 
 

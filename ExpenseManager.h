@@ -1,24 +1,24 @@
-#ifndef INCOMEMANAGER_H
-#define INCOMEMANAGER_H
+#ifndef EXPENSEMANAGER_H
+#define EXPENSEMANAGER_H
 #include <iostream>
 #include <vector>
 #include <windows.h>
 #include <stdio.h>
 
 #include "SupportMetod.h"
-#include "Income.h"
-#include "FileWithIncome.h"
+#include "Expense.h"
+#include "FileWithExpense.h"
 
 
 using namespace std;
 
-class IncomeManager
+class ExpenseManager
 {
-    vector <Income> incomes;
-    FileWithIncome fileWithIncome;
+    vector <Expense> expenses;
+    FileWithExpense fileWithExpense;
     string date;
 
-    Income income;
+    Expense expense;
     const int ID_LOGGED_IN_USER;
     void inputDataWithTodayDate();
     void inputDataWithUserDate();
@@ -29,13 +29,14 @@ class IncomeManager
     string getCurrentDateWithLastDayOfMonth();
 
 public:
-    IncomeManager(int idLoggedUser):ID_LOGGED_IN_USER(idLoggedUser){
-        incomes = fileWithIncome.loadIncomeFromFile(ID_LOGGED_IN_USER);
+    ExpenseManager(int idLoggedUser):ID_LOGGED_IN_USER(idLoggedUser){
+        expenses = fileWithExpense.loadExpenseFromFile(ID_LOGGED_IN_USER);
     };
-    void addIncome();
-    void showUserIncomes();
+    void addExpense();
+    void showUserExpenses();
 
 };
 
 
 #endif
+

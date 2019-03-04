@@ -1,25 +1,25 @@
-#ifndef INCOME_H
-#define INCOME_H
+#ifndef EXPENSE_H
+#define EXPENSE_H
 #include <iostream>
 
 using namespace std;
 
-class Income
+class Expense
 {
-    int incomeId;
+    int expenseId;
     int userId;
     int date;
     string item;
     double amount;
 
 public:
-    int getIncomeId();
+    int getExpenseId();
     int getUserId();
     int getDate();
     string getItem();
     double getAmount();
 
-    void setIncomeId(int newIncomeId);
+    void setExpenseId(int newExpenseId);
     void setUserId(int newUserId);
     void setDate(int newDate);
     void setItem(string newItem);

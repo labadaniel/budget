@@ -1,9 +1,9 @@
-#include "IncomeManager.h"
+#include "ExpenseManager.h"
 
-void IncomeManager::addIncome(){
+void ExpenseManager::addExpense(){
     char answer;
 
-    cout << "Podaj przychod: " << endl << endl;
+    cout << endl << "Podaj wydatek: " << endl << endl;
 
     cout << "1. Z data dzisiejsza" << endl;
     cout << "2. Z inna data" << endl;
@@ -24,31 +24,31 @@ void IncomeManager::addIncome(){
 }
 
 
-void IncomeManager::inputDataWithTodayDate(){
+void ExpenseManager::inputDataWithTodayDate(){
     double amount;
     string item;
     string date;
     date = SupportMetod::getCurrentTime();
     date = SupportMetod::convertUserDateToDateWithNoMinusSign(date);
 
-    income.setDate(SupportMetod::convertStringToInt(date));
-    income.setIncomeId(fileWithIncome.getIncomeId());
-    income.setUserId(ID_LOGGED_IN_USER);
-    cout << "Podaj wartosc przychodu: ";
+    expense.setDate(SupportMetod::convertStringToInt(date));
+    expense.setExpenseId(fileWithExpense.getExpenseId());
+    expense.setUserId(ID_LOGGED_IN_USER);
+    cout << "Podaj wartosc wydatku: ";
     cin >> amount;
-    income.setAmount(amount);
+    expense.setAmount(amount);
 
-    cout << "Podaj rodzaj wplaty: ";
+    cout << "Podaj rodzaj wydatku: ";
     cin >> item;
-    income.setItem(item);
+    expense.setItem(item);
 
-    incomes.push_back(income);
+    expenses.push_back(expense);
 
-    fileWithIncome.addIncomeToFile(income);
+    fileWithExpense.addExpenseToFile(expense);
 
 }
 
-void IncomeManager::inputDataWithUserDate(){
+void ExpenseManager::inputDataWithUserDate(){
     double amount;
     string item;
 
@@ -58,17 +58,17 @@ void IncomeManager::inputDataWithUserDate(){
         if(checkFormatUserDate() && checkCorrectDate()){
             date = SupportMetod::convertUserDateToDateWithNoMinusSign(date);
             if(checkLastDayFromUserInputDay(date)){
-                cout << "Podaj wartosc przychodu: ";
+                cout << "Podaj wartosc wydatku: ";
                 cin >> amount;
-                cout << "Podaj rodzaj wplaty: ";
+                cout << "Podaj rodzaj wydatku: ";
                 cin >> item;
 
-                income.setDate(SupportMetod::convertStringToInt(date));
-                income.setIncomeId(fileWithIncome.getIncomeId());
-                income.setUserId(ID_LOGGED_IN_USER);
-                income.setAmount(amount);
-                income.setItem(item);
-                incomes.push_back(income);
+                expense.setDate(SupportMetod::convertStringToInt(date));
+                expense.setExpenseId(fileWithExpense.getExpenseId());
+                expense.setUserId(ID_LOGGED_IN_USER);
+                expense.setAmount(amount);
+                expense.setItem(item);
+                expenses.push_back(expense);
             }
             else{
                 cout << "Podano date wykraczajaca poza biezacy miesiac." << endl;
@@ -83,17 +83,17 @@ void IncomeManager::inputDataWithUserDate(){
 
 
 
-void IncomeManager::showUserIncomes(){
-    for(int i = 0; i<incomes.size(); i++){
-        cout << "data: " << incomes[i].getDate() << endl;
-        cout << "id wplaty: " << incomes[i].getIncomeId() << endl;
-        cout << "id uzytkownika: " << incomes[i].getUserId() << endl;
-        cout << "wartosc: " << incomes[i].getAmount() << endl;
-        cout << "rodzaj wplaty: " << incomes[i].getItem() << endl;
+void ExpenseManager::showUserExpenses(){
+    for(int i = 0; i<expenses.size(); i++){
+        cout << "data: " << expenses[i].getDate() << endl;
+        cout << "id wyplaty: " << expenses[i].getExpenseId() << endl;
+        cout << "id uzytkownika: " << expenses[i].getUserId() << endl;
+        cout << "wartosc: " << expenses[i].getAmount() << endl;
+        cout << "rodzaj wyplaty: " << expenses[i].getItem() << endl;
     }
 }
 
-bool IncomeManager::checkCorrectDate() {
+bool ExpenseManager::checkCorrectDate() {
 
     int year, month, day;
     year = SupportMetod::splitDate(date, 0, 4);
@@ -116,14 +116,14 @@ bool IncomeManager::checkCorrectDate() {
             return true;
 }
 
-bool IncomeManager::checkFormatUserDate(){
+bool ExpenseManager::checkFormatUserDate(){
     char sign = '-';
     if(date.length() == 10)
         if(date[4] == sign && date[7] == sign)
             return 1;
 }
 
-int IncomeManager::howManyDaysInMonth(int month, int year) {
+int ExpenseManager::howManyDaysInMonth(int month, int year) {
     if (month == 4 || month == 6 || month == 9 || month == 11)
         return 30;
     else if (month == 2) {
@@ -137,7 +137,7 @@ int IncomeManager::howManyDaysInMonth(int month, int year) {
 }
 
 
-bool IncomeManager::checkLastDayFromUserInputDay(string userDate){
+bool ExpenseManager::checkLastDayFromUserInputDay(string userDate){
     int fromDate = 20000101;
     int toLastDateCurrentMonth = 0;
     int tmpUserDate;
@@ -151,7 +151,7 @@ bool IncomeManager::checkLastDayFromUserInputDay(string userDate){
         return false;
 }
 
-string IncomeManager::getCurrentDateWithLastDayOfMonth(){
+string ExpenseManager::getCurrentDateWithLastDayOfMonth(){
     int currentMonth = 0;
     int currentYear = 0;
     int amountDaysInCurrentMonth =0;
@@ -177,6 +177,7 @@ string IncomeManager::getCurrentDateWithLastDayOfMonth(){
 
     return fullDate;
 }
+
 
 
 

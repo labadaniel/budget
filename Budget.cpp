@@ -12,6 +12,7 @@ void Budget::logInUser(){
     userManager.logInUser();
     if(userManager.isUserLoggedIn())
         incomeManager = new IncomeManager(userManager.getLoggedInUserId());
+        expenseManager = new ExpenseManager(userManager.getLoggedInUserId());
 }
 
 void Budget::changeLoggedUserPassword(){
@@ -24,4 +25,12 @@ void Budget::addIncome(){
 
 void Budget::showUserIncomes(){
     incomeManager -> showUserIncomes();
+}
+
+void Budget::addExpense(){
+    expenseManager -> addExpense();
+}
+
+void Budget::showUserExpenses(){
+    expenseManager -> showUserExpenses();
 }

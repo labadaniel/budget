@@ -3,7 +3,7 @@
 void IncomeManager::addIncome(){
     char answer;
 
-    cout << "Podaj przychod: " << endl << endl;
+    cout << endl << "Podaj przychod: " << endl << endl;
 
     cout << "1. Z data dzisiejsza" << endl;
     cout << "2. Z inna data" << endl;

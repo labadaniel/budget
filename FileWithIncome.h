@@ -17,7 +17,7 @@ public:
 
     FileWithIncome(){
         fileWithIncome = "Incomes.xml";
-        incomeId = 0;
+        incomeId = 1;
     };
     int getIncomeId();
     void addIncomeToFile(Income income);
