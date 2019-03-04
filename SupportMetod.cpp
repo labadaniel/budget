@@ -22,7 +22,7 @@ int SupportMetod::convertStringToInt(string digit)
 }
 
 int SupportMetod::splitDate(string date, int start, int stop){
- //2018-02-05
+
     string newDate = "";
     for(int i = start; i < stop; i++){
             newDate += date[i];

@@ -23,12 +23,6 @@ void IncomeManager::addIncome(){
     }
 }
 
-int IncomeManager::getIncomeId() {
-    if (incomes.empty())
-        return 1;
-    else
-        return incomes.back().getIncomeId() + 1;
-}
 
 void IncomeManager::inputDataWithTodayDate(){
     double amount;
@@ -38,7 +32,7 @@ void IncomeManager::inputDataWithTodayDate(){
     date = SupportMetod::convertUserDateToDateWithNoMinusSign(date);
 
     income.setDate(SupportMetod::convertStringToInt(date));
-    income.setIncomeId(getIncomeId());
+    income.setIncomeId(fileWithIncome.getIncomeId());
     income.setUserId(ID_LOGGED_IN_USER);
     cout << "Podaj wartosc przychodu: ";
     cin >> amount;
@@ -49,6 +43,9 @@ void IncomeManager::inputDataWithTodayDate(){
     income.setItem(item);
 
     incomes.push_back(income);
+
+    fileWithIncome.addIncomeToFile(income);
+
 }
 
 void IncomeManager::inputDataWithUserDate(){
@@ -67,7 +64,7 @@ void IncomeManager::inputDataWithUserDate(){
                 cin >> item;
 
                 income.setDate(SupportMetod::convertStringToInt(date));
-                income.setIncomeId(getIncomeId());
+                income.setIncomeId(fileWithIncome.getIncomeId());
                 income.setUserId(ID_LOGGED_IN_USER);
                 income.setAmount(amount);
                 income.setItem(item);

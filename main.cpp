@@ -10,10 +10,12 @@ int main()
 
     budget.showAllUser();
     budget.logInUser();
-    budget.addIncome();
+
 
 
     budget.showUserIncomes();
+    //budget.addIncome();
+
 
 
 

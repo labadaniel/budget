@@ -7,6 +7,7 @@
 
 #include "SupportMetod.h"
 #include "Income.h"
+#include "FileWithIncome.h"
 
 
 using namespace std;
@@ -14,11 +15,11 @@ using namespace std;
 class IncomeManager
 {
     vector <Income> incomes;
+    FileWithIncome fileWithIncome;
     string date;
-    int incomeId;
+
     Income income;
     const int ID_LOGGED_IN_USER;
-    int getIncomeId();
     void inputDataWithTodayDate();
     void inputDataWithUserDate();
     bool checkCorrectDate();
@@ -29,7 +30,7 @@ class IncomeManager
 
 public:
     IncomeManager(int idLoggedUser):ID_LOGGED_IN_USER(idLoggedUser){
-        incomeId = 0;
+        incomes = fileWithIncome.loadIncomeFromFile(ID_LOGGED_IN_USER);
     };
     void addIncome();
     void showUserIncomes();
