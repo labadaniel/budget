@@ -83,13 +83,25 @@ void IncomeManager::inputDataWithUserDate(){
 }
 
 
-
 void IncomeManager::showUserIncomesCurrentMonth(){
 
     sort(incomes.begin(), incomes.end(), sortDate);
+    cout << endl << "-----PRZYCHODY - MIESIAC BIEZACY-----" << endl << endl;
     for(int i = 0; i<incomes.size(); i++){
         if(incomes[i].getDate() <= SupportMetod::convertStringToInt(getCurrentDateWithLastDayOfMonth()) &&
         incomes[i].getDate() >= SupportMetod::convertStringToInt(getCurrentDateWithFirstDayOfMonth())){
+            cout << incomes[i].getDate() << " " << incomes[i].getAmount() << "zl " << incomes[i].getItem() << endl;
+        }
+    }
+}
+
+void IncomeManager::showUserIncomesPreviouseMonth(){
+
+    sort(incomes.begin(), incomes.end(), sortDate);
+    cout << endl << "-----PRZYCHODY - MIESIAC POPRZEDNI-----" << endl << endl;
+    for(int i = 0; i<incomes.size(); i++){
+        if(incomes[i].getDate() <= SupportMetod::convertStringToInt(getPreviouseMonthWithLastDayOfMonth()) &&
+        incomes[i].getDate() >= SupportMetod::convertStringToInt(getPreviouseMonthWithFirstDayOfMonth())){
             cout << incomes[i].getDate() << " " << incomes[i].getAmount() << "zl " << incomes[i].getItem() << endl;
         }
     }
@@ -202,6 +214,77 @@ string IncomeManager::getCurrentDateWithFirstDayOfMonth(){
     }
 
     string fullDate = currentYear + currentMonth + firstCurrentDay;
+
+    return fullDate;
+}
+
+string IncomeManager::getPreviouseMonthWithLastDayOfMonth(){
+    int currentMonth = 0;
+    int currentYear = 0;
+    int amountDaysInCurrentMonth =0;
+    string date;
+    string tmpCurrentMonth = "";
+    string tmpCurrentYear = "";
+    string tmpLastDayInCurrentMonth = "";
+
+    date = SupportMetod::getCurrentTime();
+    date = SupportMetod::convertUserDateToDateWithNoMinusSign(date);
+
+    for (int i=0; i<date.length(); i++ ){
+        if(i <= 3)
+            tmpCurrentYear += date[i];
+        else if (i > 3 && i <=5)
+            tmpCurrentMonth += date[i];
+    }
+    currentMonth = SupportMetod::convertStringToInt(tmpCurrentMonth)-1;
+    if(currentMonth == 0)
+        currentMonth = 12;
+    currentYear = SupportMetod::convertStringToInt(tmpCurrentYear);
+    if(currentMonth == 12)
+        currentYear -= 1;
+    amountDaysInCurrentMonth = howManyDaysInMonth(currentMonth, currentYear);
+    tmpLastDayInCurrentMonth = SupportMetod::convertIntToString(amountDaysInCurrentMonth);
+    tmpCurrentYear = SupportMetod::convertIntToString(currentYear);
+    if(currentMonth < 10)
+        tmpCurrentMonth = "0" + SupportMetod::convertIntToString(currentMonth);
+    else
+        tmpCurrentMonth = SupportMetod::convertIntToString(currentMonth);
+
+    string fullDate = tmpCurrentYear + tmpCurrentMonth + tmpLastDayInCurrentMonth;
+    return fullDate;
+}
+
+string IncomeManager::getPreviouseMonthWithFirstDayOfMonth(){
+
+    int currentMonth = 0;
+    int currentYear = 0;
+    string date;
+    string tmpCurrentMonth = "";
+    string tmpCurrentYear = "";
+    string firstCurrentDay = "01";
+
+    date = SupportMetod::getCurrentTime();
+    date = SupportMetod::convertUserDateToDateWithNoMinusSign(date);
+
+    for (int i=0; i<date.length(); i++ ){
+        if(i <= 3)
+            tmpCurrentYear += date[i];
+        else if (i > 3 && i <=5)
+            tmpCurrentMonth += date[i];
+    }
+    currentMonth = SupportMetod::convertStringToInt(tmpCurrentMonth)-1;
+    if(currentMonth == 0)
+        currentMonth = 12;
+    currentYear = SupportMetod::convertStringToInt(tmpCurrentYear);
+    if(currentMonth == 12)
+        currentYear -= 1;
+
+    tmpCurrentYear = SupportMetod::convertIntToString(currentYear);
+    tmpCurrentMonth = SupportMetod::convertIntToString(currentMonth);
+
+
+
+    string fullDate = tmpCurrentYear + tmpCurrentMonth + firstCurrentDay;
 
     return fullDate;
 }

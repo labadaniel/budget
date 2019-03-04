@@ -29,6 +29,8 @@ class IncomeManager
     bool checkLastDayFromUserInputDay (string userDate);
     string getCurrentDateWithLastDayOfMonth();
     string getCurrentDateWithFirstDayOfMonth();
+    string getPreviouseMonthWithLastDayOfMonth();
+    string getPreviouseMonthWithFirstDayOfMonth();
     static bool sortDate (Income lhs, Income rhs);
 
 public:
@@ -37,6 +39,7 @@ public:
     };
     void addIncome();
     void showUserIncomesCurrentMonth();
+    void showUserIncomesPreviouseMonth();
 
 };
 

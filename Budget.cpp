@@ -27,6 +27,10 @@ void Budget::showUserIncomesCurrentMonth(){
     incomeManager -> showUserIncomesCurrentMonth();
 }
 
+void Budget::showUserIncomesPreviouseMonth(){
+    incomeManager -> showUserIncomesPreviouseMonth();
+}
+
 void Budget::addExpense(){
     expenseManager -> addExpense();
 }
