@@ -4,6 +4,7 @@
 #include <vector>
 #include <windows.h>
 #include <stdio.h>
+#include <algorithm>
 
 #include "SupportMetod.h"
 #include "Income.h"
@@ -27,13 +28,15 @@ class IncomeManager
     int howManyDaysInMonth(int month, int year);
     bool checkLastDayFromUserInputDay (string userDate);
     string getCurrentDateWithLastDayOfMonth();
+    string getCurrentDateWithFirstDayOfMonth();
+    static bool sortDate (Income lhs, Income rhs);
 
 public:
     IncomeManager(int idLoggedUser):ID_LOGGED_IN_USER(idLoggedUser){
         incomes = fileWithIncome.loadIncomeFromFile(ID_LOGGED_IN_USER);
     };
     void addIncome();
-    void showUserIncomes();
+    void showUserIncomesCurrentMonth();
 
 };
 

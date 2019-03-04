@@ -69,6 +69,7 @@ void IncomeManager::inputDataWithUserDate(){
                 income.setAmount(amount);
                 income.setItem(item);
                 incomes.push_back(income);
+                fileWithIncome.addIncomeToFile(income);
             }
             else{
                 cout << "Podano date wykraczajaca poza biezacy miesiac." << endl;
@@ -83,14 +84,19 @@ void IncomeManager::inputDataWithUserDate(){
 
 
 
-void IncomeManager::showUserIncomes(){
+void IncomeManager::showUserIncomesCurrentMonth(){
+
+    sort(incomes.begin(), incomes.end(), sortDate);
     for(int i = 0; i<incomes.size(); i++){
-        cout << "data: " << incomes[i].getDate() << endl;
-        cout << "id wplaty: " << incomes[i].getIncomeId() << endl;
-        cout << "id uzytkownika: " << incomes[i].getUserId() << endl;
-        cout << "wartosc: " << incomes[i].getAmount() << endl;
-        cout << "rodzaj wplaty: " << incomes[i].getItem() << endl;
+        if(incomes[i].getDate() <= SupportMetod::convertStringToInt(getCurrentDateWithLastDayOfMonth()) &&
+        incomes[i].getDate() >= SupportMetod::convertStringToInt(getCurrentDateWithFirstDayOfMonth())){
+            cout << incomes[i].getDate() << " " << incomes[i].getAmount() << "zl " << incomes[i].getItem() << endl;
+        }
     }
+}
+
+bool IncomeManager::sortDate ( Income lhs,  Income rhs){
+    return lhs.getDate() < rhs.getDate();
 }
 
 bool IncomeManager::checkCorrectDate() {
@@ -139,13 +145,13 @@ int IncomeManager::howManyDaysInMonth(int month, int year) {
 
 bool IncomeManager::checkLastDayFromUserInputDay(string userDate){
     int fromDate = 20000101;
-    int toLastDateCurrentMonth = 0;
+    int toDate = 0;
     int tmpUserDate;
 
-    toLastDateCurrentMonth = SupportMetod::convertStringToInt(getCurrentDateWithLastDayOfMonth());
+    toDate = SupportMetod::convertStringToInt(getCurrentDateWithLastDayOfMonth());
     tmpUserDate = SupportMetod::convertStringToInt(userDate);
 
-    if(tmpUserDate >= fromDate && tmpUserDate <= toLastDateCurrentMonth)
+    if(tmpUserDate >= fromDate && tmpUserDate <= toDate)
         return true;
     else
         return false;
@@ -174,6 +180,28 @@ string IncomeManager::getCurrentDateWithLastDayOfMonth(){
     amountDaysInCurrentMonth = howManyDaysInMonth(currentMonth, currentYear);
     tmpLastDayInCurrentMonth = SupportMetod::convertIntToString(amountDaysInCurrentMonth);
     string fullDate = tmpCurrentYear + tmpCurrentMonth + tmpLastDayInCurrentMonth;
+
+    return fullDate;
+}
+
+string IncomeManager::getCurrentDateWithFirstDayOfMonth(){
+
+    string date;
+    string currentMonth = "";
+    string currentYear = "";
+    string firstCurrentDay = "01";
+
+    date = SupportMetod::getCurrentTime();
+    date = SupportMetod::convertUserDateToDateWithNoMinusSign(date);
+
+    for (int i=0; i<date.length(); i++ ){
+        if(i <= 3)
+            currentYear += date[i];
+        else if (i > 3 && i <=5)
+            currentMonth += date[i];
+    }
+
+    string fullDate = currentYear + currentMonth + firstCurrentDay;
 
     return fullDate;
 }

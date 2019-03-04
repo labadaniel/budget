@@ -10,15 +10,12 @@ int main()
 
     budget.showAllUser();
     budget.logInUser();
-
     budget.addIncome();
-    budget.addExpense();
 
 
-    budget.showUserIncomes();
-    budget.showUserExpenses();
 
 
+    budget.showUserIncomesCurrentMonth();
 
 
     return 0;

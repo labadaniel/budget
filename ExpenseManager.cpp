@@ -69,6 +69,7 @@ void ExpenseManager::inputDataWithUserDate(){
                 expense.setAmount(amount);
                 expense.setItem(item);
                 expenses.push_back(expense);
+                fileWithExpense.addExpenseToFile(expense);
             }
             else{
                 cout << "Podano date wykraczajaca poza biezacy miesiac." << endl;

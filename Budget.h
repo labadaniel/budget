@@ -31,7 +31,7 @@ public:
     void logInUser();
     void changeLoggedUserPassword();
     void addIncome();
-    void showUserIncomes();
+    void showUserIncomesCurrentMonth();
     void addExpense();
     void showUserExpenses();
 };

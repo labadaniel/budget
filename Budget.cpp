@@ -23,8 +23,8 @@ void Budget::addIncome(){
     incomeManager -> addIncome();
 }
 
-void Budget::showUserIncomes(){
-    incomeManager -> showUserIncomes();
+void Budget::showUserIncomesCurrentMonth(){
+    incomeManager -> showUserIncomesCurrentMonth();
 }
 
 void Budget::addExpense(){
