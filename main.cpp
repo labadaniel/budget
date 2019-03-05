@@ -11,15 +11,14 @@ int main()
     budget.showAllUser();
     budget.logInUser();
 
-
-
-
-
     budget.showUserIncomesCurrentMonth();
     budget.showUserExpensesCurrentMonth();
     budget.checkBalance();
+    budget.showUserIncomesFromUserPeriod();
 
-    //budget.showUserIncomesPreviouseMonth();
+
+
+
 
 
     return 0;

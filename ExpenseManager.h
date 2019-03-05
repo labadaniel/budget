@@ -35,6 +35,7 @@ public:
     void addExpense();
     void showUserExpensesCurrentMonth();
     void showUserExpensesPreviouseMonth();
+    void showUserExpensesFromUserPeriod(string inputUserDateFrom, string inputUserDateTo);
     int getSumOfExpenses();
 };
 #endif

@@ -197,4 +197,23 @@ int SupportMetod::howManyDaysInMonth(int month, int year) {
         return 31;
 }
 
+string SupportMetod::convertDateToDateWithMinusSign(int date){
+    string strDate;
+    string convertedDateWithMinusSign = "";
+    strDate = convertIntToString(date);
+
+    for (int i =0; i < strDate.length(); i++){
+        if(i == 4 || i == 6){
+            convertedDateWithMinusSign += '-';
+            convertedDateWithMinusSign += strDate[i];
+        }
+        else {
+            convertedDateWithMinusSign += strDate[i];
+        }
+    }
+    return convertedDateWithMinusSign;
+}
+
+
+
 

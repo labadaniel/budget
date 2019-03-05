@@ -34,6 +34,7 @@ public:
     void addIncome();
     void showUserIncomesCurrentMonth();
     void showUserIncomesPreviouseMonth();
+    void showUserIncomesFromUserPeriod(string inputUserDateFrom, string inputUserDateTo);
     int getSumOfIncomes();
 };
 #endif

@@ -1,6 +1,6 @@
 #include "IncomeManager.h"
 
-void IncomeManager::addIncome(){
+void IncomeManager::addIncome() {
     char answer;
 
     cout << endl << "Podaj przychod: " << endl << endl;
@@ -10,7 +10,7 @@ void IncomeManager::addIncome(){
 
     cin >> answer;
 
-    switch(answer){
+    switch(answer) {
     case '1':
         inputDataWithTodayDate();
         break;
@@ -24,7 +24,7 @@ void IncomeManager::addIncome(){
 }
 
 
-void IncomeManager::inputDataWithTodayDate(){
+void IncomeManager::inputDataWithTodayDate() {
     double amount;
     string item;
     string date;
@@ -48,69 +48,69 @@ void IncomeManager::inputDataWithTodayDate(){
 
 }
 
-void IncomeManager::inputDataWithUserDate(){
+void IncomeManager::inputDataWithUserDate() {
     double amount;
     string item;
 
     cout << "Podaj date (rrrr-mm-dd) pod ktora wpisac wplate: ";
     cin >> date;
 
-        if(checkFormatUserDate() && checkCorrectDate()){
-            date = SupportMetod::convertUserDateToDateWithNoMinusSign(date);
-            if(SupportMetod::checkLastDayFromUserInputDay(date)){
-                cout << "Podaj wartosc przychodu: ";
-                cin >> amount;
-                cout << "Podaj rodzaj wplaty: ";
-                cin >> item;
+    if(checkFormatUserDate() && checkCorrectDate()) {
+        date = SupportMetod::convertUserDateToDateWithNoMinusSign(date);
+        if(SupportMetod::checkLastDayFromUserInputDay(date)) {
+            cout << "Podaj wartosc przychodu: ";
+            cin >> amount;
+            cout << "Podaj rodzaj wplaty: ";
+            cin >> item;
 
-                income.setDate(SupportMetod::convertStringToInt(date));
-                income.setIncomeId(fileWithIncome.getIncomeId());
-                income.setUserId(ID_LOGGED_IN_USER);
-                income.setAmount(amount);
-                income.setItem(item);
-                incomes.push_back(income);
-                fileWithIncome.addIncomeToFile(income);
-            }
-            else{
-                cout << "Podano date wykraczajaca poza biezacy miesiac." << endl;
-                system("pause");
-            }
-        }
-        else {
-            cout << "Podano niepoprawna date!" << endl;
+            income.setDate(SupportMetod::convertStringToInt(date));
+            income.setIncomeId(fileWithIncome.getIncomeId());
+            income.setUserId(ID_LOGGED_IN_USER);
+            income.setAmount(amount);
+            income.setItem(item);
+            incomes.push_back(income);
+            fileWithIncome.addIncomeToFile(income);
+        } else {
+            cout << "Podano date wykraczajaca poza biezacy miesiac." << endl;
             system("pause");
         }
+    } else {
+        cout << "Podano niepoprawna date!" << endl;
+        system("pause");
+    }
 }
 
 
-void IncomeManager::showUserIncomesCurrentMonth(){
+void IncomeManager::showUserIncomesCurrentMonth() {
 
     sumOfIncomes = 0;
     sort(incomes.begin(), incomes.end(), SupportMetod::sortDateIncome);
     cout << endl << "-----PRZYCHODY - MIESIAC BIEZACY-----" << endl << endl;
-    for(int i = 0; i<incomes.size(); i++){
+    for(int i = 0; i<incomes.size(); i++) {
         if(incomes[i].getDate() <= SupportMetod::convertStringToInt(SupportMetod::getCurrentDateWithLastDayOfMonth()) &&
-        incomes[i].getDate() >= SupportMetod::convertStringToInt(SupportMetod::getCurrentDateWithFirstDayOfMonth())){
-            cout << incomes[i].getDate() << " " << incomes[i].getAmount() << "zl " << incomes[i].getItem() << endl;
+                incomes[i].getDate() >= SupportMetod::convertStringToInt(SupportMetod::getCurrentDateWithFirstDayOfMonth())) {
+            cout << SupportMetod::convertDateToDateWithMinusSign(incomes[i].getDate()) << " " << incomes[i].getAmount() << "zl " << incomes[i].getItem() << endl;
             sumOfIncomes += incomes[i].getAmount();
         }
 
-    }cout << endl << "Suma przychodow wynosi: " << sumOfIncomes << "zl " << endl;
+    }
+    cout << endl << "Suma przychodow wynosi: " << sumOfIncomes << "zl " << endl;
 
 }
 
-void IncomeManager::showUserIncomesPreviouseMonth(){
+void IncomeManager::showUserIncomesPreviouseMonth() {
 
     sumOfIncomes = 0;
     sort(incomes.begin(), incomes.end(), SupportMetod::sortDateIncome);
     cout << endl << "-----PRZYCHODY - MIESIAC POPRZEDNI-----" << endl << endl;
-    for(int i = 0; i<incomes.size(); i++){
+    for(int i = 0; i<incomes.size(); i++) {
         if(incomes[i].getDate() <= SupportMetod::convertStringToInt(SupportMetod::getPreviouseMonthWithLastDayOfMonth()) &&
-        incomes[i].getDate() >= SupportMetod::convertStringToInt(SupportMetod::getPreviouseMonthWithFirstDayOfMonth())){
-            cout << incomes[i].getDate() << " " << incomes[i].getAmount() << "zl " << incomes[i].getItem() << endl;
+                incomes[i].getDate() >= SupportMetod::convertStringToInt(SupportMetod::getPreviouseMonthWithFirstDayOfMonth())) {
+            cout << SupportMetod::convertDateToDateWithMinusSign(incomes[i].getDate()) << " " << incomes[i].getAmount() << "zl " << incomes[i].getItem() << endl;
             sumOfIncomes += incomes[i].getAmount();
         }
-    }cout << endl << "Suma przychodow wynosi: " << sumOfIncomes << "zl " << endl;
+    }
+    cout << endl << "Suma przychodow wynosi: " << sumOfIncomes << "zl " << endl;
 }
 
 bool IncomeManager::checkCorrectDate() {
@@ -120,32 +120,52 @@ bool IncomeManager::checkCorrectDate() {
     month = SupportMetod::splitDate(date, 5, 7);
     day = SupportMetod::splitDate(date, 8, 10);
 
-        if(day > 31)
+    if(day > 31)
+        return false;
+    else if ((month == 4 || month == 6 || month == 9 || month == 11) && day <=30)
+        return true;
+    else if (month == 2) {
+        bool isLeapYear = ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0));
+        if (isLeapYear && day <=29)
+            return true;
+        else if(day <=28)
+            return true;
+        else
             return false;
-        else if ((month == 4 || month == 6 || month == 9 || month == 11) && day <=30)
-            return true;
-        else if (month == 2) {
-            bool isLeapYear = ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0));
-            if (isLeapYear && day <=29)
-                return true;
-            else if(day <=28)
-                return true;
-            else
-                return false;
-        } else
-            return true;
+    } else
+        return true;
 }
 
-bool IncomeManager::checkFormatUserDate(){
+bool IncomeManager::checkFormatUserDate() {
     char sign = '-';
     if(date.length() == 10)
         if(date[4] == sign && date[7] == sign)
             return 1;
 }
 
-int IncomeManager::getSumOfIncomes(){
+int IncomeManager::getSumOfIncomes() {
     return sumOfIncomes;
 }
+
+void IncomeManager::showUserIncomesFromUserPeriod(string inputUserDateFrom, string inputUserDateTo) {
+
+    sumOfIncomes = 0;
+    sort(incomes.begin(), incomes.end(), SupportMetod::sortDateIncome);
+    cout << endl << "-----PRZYCHODY - WYBRANY OKRES-----" << endl << endl;
+    for(int i = 0; i<incomes.size(); i++) {
+        if(incomes[i].getDate() <= SupportMetod::convertStringToInt(SupportMetod::convertUserDateToDateWithNoMinusSign(inputUserDateTo)) &&
+        incomes[i].getDate() >= SupportMetod::convertStringToInt(SupportMetod::convertUserDateToDateWithNoMinusSign(inputUserDateFrom))) {
+            cout << SupportMetod::convertDateToDateWithMinusSign(incomes[i].getDate()) << " " << incomes[i].getAmount() << "zl " << incomes[i].getItem() << endl;
+            sumOfIncomes += incomes[i].getAmount();
+        }
+    }
+    cout << endl << "Suma przychodow wynosi: " << sumOfIncomes << "zl " << endl;
+
+}
+
+
+
+
 
 
 

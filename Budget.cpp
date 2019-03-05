@@ -43,6 +43,20 @@ void Budget::showUserExpensesPreviouseMonth(){
     expenseManager -> showUserExpensesPreviouseMonth();
 }
 
+void Budget::showUserIncomesFromUserPeriod(){
+    string inputUserDateFrom;
+    string inputUserDateTo;
+
+    cout << "Podaj od jakiej daty pokazac przychody (rrrr-mm-dd): ";
+    cin >> inputUserDateFrom;
+
+    cout << "Podaj do jakiej daty pokazac przychody (rrrr-mm-dd): ";
+    cin >> inputUserDateTo;
+
+    incomeManager -> showUserIncomesFromUserPeriod(inputUserDateFrom, inputUserDateTo);
+    expenseManager -> showUserExpensesFromUserPeriod(inputUserDateFrom, inputUserDateTo);
+}
+
 void Budget::checkBalance(){
-    cout << endl << "Balance dla przychodow do wydatkow wynosi: " << incomeManager -> getSumOfIncomes() - expenseManager -> getSumOfExpenses() << "zl. " << endl;
+    cout << endl << "Bilans dla przychodow do wydatkow wynosi: " << incomeManager -> getSumOfIncomes() - expenseManager -> getSumOfExpenses() << "zl. " << endl;
 }
