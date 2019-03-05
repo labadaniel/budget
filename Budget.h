@@ -15,6 +15,7 @@ class Budget
     IncomeManager *incomeManager;
     ExpenseManager *expenseManager;
 
+
 public:
     Budget(){
         incomeManager = NULL;
@@ -38,6 +39,10 @@ public:
     void showUserExpensesPreviouseMonth();
     void showUserIncomesFromUserPeriod();
     void checkBalance();
+    char mainManu();
+    char userManu();
+    bool isUserLogedIn();
+    void logOutUser();
 };
 
 

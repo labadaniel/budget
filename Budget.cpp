@@ -58,5 +58,62 @@ void Budget::showUserIncomesFromUserPeriod(){
 }
 
 void Budget::checkBalance(){
-    cout << endl << "Bilans dla przychodow do wydatkow wynosi: " << incomeManager -> getSumOfIncomes() - expenseManager -> getSumOfExpenses() << "zl. " << endl;
+    cout << endl << endl << "Bilans wynosi: " << incomeManager -> getSumOfIncomes() - expenseManager -> getSumOfExpenses() << "zl. " << endl << endl;
+    system ("pause");
+}
+
+char Budget::mainManu()
+{
+    char option;
+
+    system("cls");
+    cout << "    >>> MENU  GLOWNE <<<" << endl;
+    cout << "---------------------------" << endl;
+    cout << "1. Rejestracja" << endl;
+    cout << "2. Logowanie" << endl;
+    cout << "9. Koniec programu" << endl;
+    cout << "---------------------------" << endl;
+    cout << "Twoj wybor: ";
+    cin >> option;
+
+    return option;
+}
+
+char Budget::userManu(){
+    char option;
+
+    system("cls");
+    cout << " >>> MENU UZYTKOWNIKA <<<" << endl;
+    cout << "---------------------------" << endl;
+    cout << "1. Dodaj przychod" << endl;
+    cout << "2. Dodaj wydatek" << endl;
+    cout << "3. Bilans z biezacego miesiaca" << endl;
+    cout << "4. Bilans z poprzedniego miesiaca" << endl;
+    cout << "5. Bilans z wybranego okresu" << endl;
+    cout << "---------------------------" << endl;
+    cout << "6. Zmien haslo" << endl;
+    cout << "7. Wyloguj sie" << endl;
+    cout << "---------------------------" << endl;
+    cout << "Twoj wybor: ";
+    cin >> option;
+
+    return option;
+}
+
+bool Budget::isUserLogedIn(){
+
+    if(userManager.isUserLoggedIn())
+        return true;
+    else
+        return false;
+}
+
+void Budget::logOutUser(){
+
+    userManager.logOutUser();
+    delete incomeManager;
+    delete expenseManager;
+
+    incomeManager = NULL;
+    expenseManager = NULL;
 }

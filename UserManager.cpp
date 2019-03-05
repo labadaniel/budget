@@ -118,4 +118,8 @@ bool UserManager::isUserLoggedIn(){
         return false;
 }
 
+void UserManager::logOutUser(){
+    idLoggedInUser = 0 ;
+}
+
 
