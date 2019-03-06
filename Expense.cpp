@@ -1,4 +1,5 @@
 #include "Expense.h"
+#include "SupportMetod.h"
 
     int Expense::getExpenseId(){
         return expenseId;
@@ -28,6 +29,6 @@
     void Expense::setItem(string newItem){
         item = newItem;
     }
-    void Expense::setAmount(double newAmount){
-        amount = newAmount;
+    void Expense::setAmount(string newAmount){
+        amount = SupportMetod::checkIfComma(newAmount);
     }

@@ -21,6 +21,14 @@ int SupportMetod::convertStringToInt(string digit)
     return digitInt;
 }
 
+double SupportMetod::convertStringToDouble(string digit){
+    double digitInt;
+    istringstream iss(digit);
+    iss >> digitInt;
+
+    return digitInt;
+}
+
 int SupportMetod::splitDate(string date, int start, int stop){
 
     string newDate = "";
@@ -40,6 +48,13 @@ string SupportMetod::convertUserDateToDateWithNoMinusSign(string date){
 }
 
 string SupportMetod::convertIntToString(int digit) {
+    ostringstream ss;
+    ss << digit;
+    string str = ss.str();
+    return str;
+}
+
+string SupportMetod::convertDoubleToString(double digit) {
     ostringstream ss;
     ss << digit;
     string str = ss.str();
@@ -212,6 +227,15 @@ string SupportMetod::convertDateToDateWithMinusSign(int date){
         }
     }
     return convertedDateWithMinusSign;
+}
+
+double SupportMetod::checkIfComma (string amount){
+
+    for(int i=0; i < amount.length(); i++){
+        if(amount[i] == ',')
+            amount[i] = '.';
+    }
+    return convertStringToDouble(amount);
 }
 
 

@@ -1,4 +1,5 @@
 #include "Income.h"
+#include "SupportMetod.h"
 
     int Income::getIncomeId(){
         return incomeId;
@@ -28,6 +29,6 @@
     void Income::setItem(string newItem){
         item = newItem;
     }
-    void Income::setAmount(double newAmount){
-        amount = newAmount;
+    void Income::setAmount(string newAmount){
+        amount = SupportMetod::checkIfComma(newAmount);
     }

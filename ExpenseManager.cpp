@@ -25,7 +25,7 @@ void ExpenseManager::addExpense(){
 
 
 void ExpenseManager::inputDataWithTodayDate(){
-    double amount;
+    string amount;
     string item;
     string date;
     date = SupportMetod::getCurrentTime();
@@ -49,7 +49,7 @@ void ExpenseManager::inputDataWithTodayDate(){
 }
 
 void ExpenseManager::inputDataWithUserDate(){
-    double amount;
+    string amount;
     string item;
 
     cout << "Podaj date (rrrr-mm-dd) pod ktora wpisac wplate: ";
@@ -156,7 +156,7 @@ void ExpenseManager::showUserExpensesPreviouseMonth(){
     }cout << endl << "Suma wydatkow wynosi: " << sumOfExpenses << "zl " << endl;
 }
 
-int ExpenseManager::getSumOfExpenses(){
+double ExpenseManager::getSumOfExpenses(){
     return sumOfExpenses;
 }
 

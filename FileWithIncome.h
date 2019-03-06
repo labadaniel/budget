@@ -6,6 +6,7 @@
 #include "Markup.h"
 #include "Income.h"
 
+
 using namespace std;
 
 class FileWithIncome {

@@ -1,5 +1,6 @@
 #include "IncomeManager.h"
 
+
 void IncomeManager::addIncome() {
     char answer;
 
@@ -25,7 +26,7 @@ void IncomeManager::addIncome() {
 
 
 void IncomeManager::inputDataWithTodayDate() {
-    double amount;
+    string amount;
     string item;
     string date;
     date = SupportMetod::getCurrentTime();
@@ -36,10 +37,12 @@ void IncomeManager::inputDataWithTodayDate() {
     income.setUserId(ID_LOGGED_IN_USER);
     cout << "Podaj wartosc przychodu: ";
     cin >> amount;
+
     income.setAmount(amount);
 
     cout << "Podaj rodzaj wplaty: ";
     cin >> item;
+
     income.setItem(item);
 
     incomes.push_back(income);
@@ -49,7 +52,7 @@ void IncomeManager::inputDataWithTodayDate() {
 }
 
 void IncomeManager::inputDataWithUserDate() {
-    double amount;
+    string amount;
     string item;
 
     cout << "Podaj date (rrrr-mm-dd) pod ktora wpisac wplate: ";
@@ -143,7 +146,7 @@ bool IncomeManager::checkFormatUserDate() {
             return 1;
 }
 
-int IncomeManager::getSumOfIncomes() {
+double IncomeManager::getSumOfIncomes() {
     return sumOfIncomes;
 }
 

@@ -18,7 +18,7 @@ class IncomeManager
     vector <Income> incomes;
     FileWithIncome fileWithIncome;
     string date;
-    int sumOfIncomes;
+    double sumOfIncomes;
     Income income;
     const int ID_LOGGED_IN_USER;
     void inputDataWithTodayDate();
@@ -35,6 +35,6 @@ public:
     void showUserIncomesCurrentMonth();
     void showUserIncomesPreviouseMonth();
     void showUserIncomesFromUserPeriod(string inputUserDateFrom, string inputUserDateTo);
-    int getSumOfIncomes();
+    double getSumOfIncomes();
 };
 #endif

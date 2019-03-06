@@ -2,6 +2,8 @@
 #define INCOME_H
 #include <iostream>
 
+
+
 using namespace std;
 
 class Income
@@ -23,6 +25,6 @@ public:
     void setUserId(int newUserId);
     void setDate(int newDate);
     void setItem(string newItem);
-    void setAmount(double newAmount);
+    void setAmount(string newAmount);
 };
 #endif

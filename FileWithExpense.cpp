@@ -1,4 +1,5 @@
 #include "FileWithExpense.h"
+#include "SupportMetod.h"
 
 
 void FileWithExpense::addExpenseToFile(Expense expense) {
@@ -16,7 +17,7 @@ void FileWithExpense::addExpenseToFile(Expense expense) {
     fileXml.AddElem("userId", expense.getUserId());
     fileXml.AddElem("date", expense.getDate());
     fileXml.AddElem("item", expense.getItem());
-    fileXml.AddElem("amount", expense.getAmount());
+    fileXml.AddElem("amount", SupportMetod::convertDoubleToString(expense.getAmount()));
     fileXml.Save(fileWithExpense);
 }
 
@@ -38,7 +39,7 @@ vector <Expense> FileWithExpense::loadExpenseFromFile(int ID_LOGGED_IN_USER) {
         xml.FindElem("item");
         expense.setItem(xml.GetData());
         xml.FindElem("amount");
-        expense.setAmount( atoi( MCD_2PCSZ(xml.GetData())));
+        expense.setAmount(xml.GetData());
         expenseId++;
         if (expense.getUserId() == ID_LOGGED_IN_USER)
             expenses.push_back(expense);

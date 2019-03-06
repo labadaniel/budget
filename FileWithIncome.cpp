@@ -1,5 +1,5 @@
 #include "FileWithIncome.h"
-
+#include "SupportMetod.h"
 
 void FileWithIncome::addIncomeToFile(Income income) {
     CMarkup fileXml;
@@ -16,8 +16,10 @@ void FileWithIncome::addIncomeToFile(Income income) {
     fileXml.AddElem("userId", income.getUserId());
     fileXml.AddElem("date", income.getDate());
     fileXml.AddElem("item", income.getItem());
-    fileXml.AddElem("amount", income.getAmount());
+    fileXml.AddElem("amount", SupportMetod::convertDoubleToString(income.getAmount()));
     fileXml.Save(fileWithIncome);
+    cout << income.getAmount();
+    system("pause");
 }
 
 vector <Income> FileWithIncome::loadIncomeFromFile(int ID_LOGGED_IN_USER) {
@@ -38,7 +40,7 @@ vector <Income> FileWithIncome::loadIncomeFromFile(int ID_LOGGED_IN_USER) {
         xml.FindElem("item");
         income.setItem(xml.GetData());
         xml.FindElem("amount");
-        income.setAmount( atoi( MCD_2PCSZ(xml.GetData())));
+        income.setAmount( xml.GetData());
         incomeId++;
         if (income.getUserId() == ID_LOGGED_IN_USER)
             incomes.push_back(income);

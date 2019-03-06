@@ -18,7 +18,7 @@ class ExpenseManager
     vector <Expense> expenses;
     FileWithExpense fileWithExpense;
     string date;
-    int sumOfExpenses;
+    double sumOfExpenses;
 
     Expense expense;
     const int ID_LOGGED_IN_USER;
@@ -36,7 +36,7 @@ public:
     void showUserExpensesCurrentMonth();
     void showUserExpensesPreviouseMonth();
     void showUserExpensesFromUserPeriod(string inputUserDateFrom, string inputUserDateTo);
-    int getSumOfExpenses();
+    double getSumOfExpenses();
 };
 #endif
 
