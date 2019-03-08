@@ -8,7 +8,7 @@ int main() {
     Budget budget;
     while(1) {
         if(budget.isUserLogedIn()) {
-            char option = budget.userManu();
+            char option = budget.userMenu();
 
             switch(option) {
             case '1':
@@ -18,18 +18,13 @@ int main() {
                 budget.addExpense();
                 break;
             case '3':
-                budget.showUserIncomesCurrentMonth();
-                budget.showUserExpensesCurrentMonth();
-                budget.checkBalance();
+                budget.showUserBalanceCurrentMonth();
                 break;
             case '4':
-                budget.showUserIncomesPreviouseMonth();
-                budget.showUserExpensesPreviouseMonth();
-                budget.checkBalance();
+                budget.showUserBalancePreviouseMonth();
                 break;
             case '5':
-                budget.showUserIncomesFromUserPeriod();
-                budget.checkBalance();
+                budget.showUserBalanceFromUserPeriod();
                 break;
             case '6':
                 budget.changeLoggedUserPassword();
@@ -43,7 +38,7 @@ int main() {
                 break;
             }
         } else {
-            char option = budget.mainManu();
+            char option = budget.mainMenu();
 
             switch(option) {
             case '1':

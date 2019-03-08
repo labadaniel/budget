@@ -48,7 +48,6 @@ void IncomeManager::inputDataWithTodayDate() {
     incomes.push_back(income);
 
     fileWithIncome.addIncomeToFile(income);
-
 }
 
 void IncomeManager::inputDataWithUserDate() {
@@ -84,36 +83,20 @@ void IncomeManager::inputDataWithUserDate() {
 }
 
 
-void IncomeManager::showUserIncomesCurrentMonth() {
+void IncomeManager::showUserBalance(string fromDate, string toDate) {
 
     sumOfIncomes = 0;
     sort(incomes.begin(), incomes.end(), SupportMetod::sortDateIncome);
-    cout << endl << "-----PRZYCHODY - MIESIAC BIEZACY-----" << endl << endl;
+    cout << endl << "----- PRZYCHODY -----" << endl << endl;
     for(int i = 0; i<incomes.size(); i++) {
-        if(incomes[i].getDate() <= SupportMetod::convertStringToInt(SupportMetod::getCurrentDateWithLastDayOfMonth()) &&
-                incomes[i].getDate() >= SupportMetod::convertStringToInt(SupportMetod::getCurrentDateWithFirstDayOfMonth())) {
-            cout << SupportMetod::convertDateToDateWithMinusSign(incomes[i].getDate()) << " " << incomes[i].getAmount() << "zl " << incomes[i].getItem() << endl;
-            sumOfIncomes += incomes[i].getAmount();
-        }
-
-    }
-    cout << endl << "Suma przychodow wynosi: " << sumOfIncomes << "zl " << endl;
-
-}
-
-void IncomeManager::showUserIncomesPreviouseMonth() {
-
-    sumOfIncomes = 0;
-    sort(incomes.begin(), incomes.end(), SupportMetod::sortDateIncome);
-    cout << endl << "-----PRZYCHODY - MIESIAC POPRZEDNI-----" << endl << endl;
-    for(int i = 0; i<incomes.size(); i++) {
-        if(incomes[i].getDate() <= SupportMetod::convertStringToInt(SupportMetod::getPreviouseMonthWithLastDayOfMonth()) &&
-                incomes[i].getDate() >= SupportMetod::convertStringToInt(SupportMetod::getPreviouseMonthWithFirstDayOfMonth())) {
+        if(incomes[i].getDate() <= SupportMetod::convertStringToInt(toDate) &&
+                incomes[i].getDate() >= SupportMetod::convertStringToInt(fromDate)) {
             cout << SupportMetod::convertDateToDateWithMinusSign(incomes[i].getDate()) << " " << incomes[i].getAmount() << "zl " << incomes[i].getItem() << endl;
             sumOfIncomes += incomes[i].getAmount();
         }
     }
     cout << endl << "Suma przychodow wynosi: " << sumOfIncomes << "zl " << endl;
+
 }
 
 bool IncomeManager::checkCorrectDate() {
@@ -149,32 +132,3 @@ bool IncomeManager::checkFormatUserDate() {
 double IncomeManager::getSumOfIncomes() {
     return sumOfIncomes;
 }
-
-void IncomeManager::showUserIncomesFromUserPeriod(string inputUserDateFrom, string inputUserDateTo) {
-
-    sumOfIncomes = 0;
-    sort(incomes.begin(), incomes.end(), SupportMetod::sortDateIncome);
-    cout << endl << "-----PRZYCHODY - WYBRANY OKRES-----" << endl << endl;
-    for(int i = 0; i<incomes.size(); i++) {
-        if(incomes[i].getDate() <= SupportMetod::convertStringToInt(SupportMetod::convertUserDateToDateWithNoMinusSign(inputUserDateTo)) &&
-        incomes[i].getDate() >= SupportMetod::convertStringToInt(SupportMetod::convertUserDateToDateWithNoMinusSign(inputUserDateFrom))) {
-            cout << SupportMetod::convertDateToDateWithMinusSign(incomes[i].getDate()) << " " << incomes[i].getAmount() << "zl " << incomes[i].getItem() << endl;
-            sumOfIncomes += incomes[i].getAmount();
-        }
-    }
-    cout << endl << "Suma przychodow wynosi: " << sumOfIncomes << "zl " << endl;
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-

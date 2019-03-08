@@ -33,9 +33,7 @@ public:
         expenses = fileWithExpense.loadExpenseFromFile(ID_LOGGED_IN_USER);
     };
     void addExpense();
-    void showUserExpensesCurrentMonth();
-    void showUserExpensesPreviouseMonth();
-    void showUserExpensesFromUserPeriod(string inputUserDateFrom, string inputUserDateTo);
+    void showUserBalance(string fromDate, string toDate);
     double getSumOfExpenses();
 };
 #endif

@@ -23,7 +23,6 @@ void ExpenseManager::addExpense(){
     }
 }
 
-
 void ExpenseManager::inputDataWithTodayDate(){
     string amount;
     string item;
@@ -126,30 +125,14 @@ bool ExpenseManager::checkLastDayFromUserInputDay(string userDate){
         return false;
 }
 
-void ExpenseManager::showUserExpensesCurrentMonth(){
+void ExpenseManager::showUserBalance(string fromDate, string toDate){
 
     sumOfExpenses = 0;
     sort(expenses.begin(), expenses.end(), SupportMetod::sortDateExpense);
-    cout << endl << "-----WYDATKI - MIESIAC BIEZACY-----" << endl << endl;
+    cout << endl << "----- WYDATKI -----" << endl << endl;
     for(int i = 0; i<expenses.size(); i++){
-        if(expenses[i].getDate() <= SupportMetod::convertStringToInt(SupportMetod::getCurrentDateWithLastDayOfMonth()) &&
-        expenses[i].getDate() >= SupportMetod::convertStringToInt(SupportMetod::getCurrentDateWithFirstDayOfMonth())){
-            cout << SupportMetod::convertDateToDateWithMinusSign(expenses[i].getDate()) << " " << expenses[i].getAmount() << "zl " << expenses[i].getItem() << endl;
-            sumOfExpenses += expenses[i].getAmount();
-        }
-
-    }cout << endl << "Suma wydatkow wynosi: " << sumOfExpenses << "zl " << endl;
-
-}
-
-void ExpenseManager::showUserExpensesPreviouseMonth(){
-
-    sumOfExpenses = 0;
-    sort(expenses.begin(), expenses.end(), SupportMetod::sortDateExpense);
-    cout << endl << "-----WYDATKI - MIESIAC POPRZEDNI-----" << endl << endl;
-    for(int i = 0; i<expenses.size(); i++){
-        if(expenses[i].getDate() <= SupportMetod::convertStringToInt(SupportMetod::getPreviouseMonthWithLastDayOfMonth()) &&
-        expenses[i].getDate() >= SupportMetod::convertStringToInt(SupportMetod::getPreviouseMonthWithFirstDayOfMonth())){
+        if(expenses[i].getDate() <= SupportMetod::convertStringToInt(toDate) &&
+        expenses[i].getDate() >= SupportMetod::convertStringToInt(fromDate)){
             cout << SupportMetod::convertDateToDateWithMinusSign(expenses[i].getDate()) << " " << expenses[i].getAmount() << "zl " << expenses[i].getItem() << endl;
             sumOfExpenses += expenses[i].getAmount();
         }
@@ -159,25 +142,3 @@ void ExpenseManager::showUserExpensesPreviouseMonth(){
 double ExpenseManager::getSumOfExpenses(){
     return sumOfExpenses;
 }
-
-void ExpenseManager::showUserExpensesFromUserPeriod(string inputUserDateFrom, string inputUserDateTo) {
-
-    sumOfExpenses = 0;
-    sort(expenses.begin(), expenses.end(), SupportMetod::sortDateExpense);
-    cout << endl << "-----WYDATKI - WYBRANY OKRES-----" << endl << endl;
-    for(int i = 0; i<expenses.size(); i++) {
-        if(expenses[i].getDate() <= SupportMetod::convertStringToInt(SupportMetod::convertUserDateToDateWithNoMinusSign(inputUserDateTo)) &&
-        expenses[i].getDate() >= SupportMetod::convertStringToInt(SupportMetod::convertUserDateToDateWithNoMinusSign(inputUserDateFrom))) {
-            cout << SupportMetod::convertDateToDateWithMinusSign(expenses[i].getDate()) << " " << expenses[i].getAmount() << "zl " << expenses[i].getItem() << endl;
-            sumOfExpenses += expenses[i].getAmount();
-        }
-    }
-    cout << endl << "Suma wydatkow wynosi: " << sumOfExpenses << "zl " << endl;
-
-}
-
-
-
-
-
-
