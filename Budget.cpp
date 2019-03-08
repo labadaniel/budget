@@ -23,38 +23,28 @@ void Budget::addIncome(){
     incomeManager -> addIncome();
 }
 
-void Budget::showUserIncomesCurrentMonth(){
-    incomeManager -> showUserIncomesCurrentMonth();
-}
-
-void Budget::showUserIncomesPreviouseMonth(){
-    incomeManager -> showUserIncomesPreviouseMonth();
-}
-
 void Budget::addExpense(){
     expenseManager -> addExpense();
 }
 
-void Budget::showUserExpensesCurrentMonth(){
-    expenseManager -> showUserExpensesCurrentMonth();
-}
-
-void Budget::showUserExpensesPreviouseMonth(){
-    expenseManager -> showUserExpensesPreviouseMonth();
-}
-
-void Budget::showUserIncomesFromUserPeriod(){
+void Budget::showUserBalanceFromUserPeriod(){
     string inputUserDateFrom;
     string inputUserDateTo;
 
     cout << "Podaj od jakiej daty pokazac przychody (rrrr-mm-dd): ";
     cin >> inputUserDateFrom;
 
+    inputUserDateFrom = SupportMetod::convertUserDateToDateWithNoMinusSign(inputUserDateFrom);
+
     cout << "Podaj do jakiej daty pokazac przychody (rrrr-mm-dd): ";
     cin >> inputUserDateTo;
 
-    incomeManager -> showUserIncomesFromUserPeriod(inputUserDateFrom, inputUserDateTo);
-    expenseManager -> showUserExpensesFromUserPeriod(inputUserDateFrom, inputUserDateTo);
+    inputUserDateTo = SupportMetod::convertUserDateToDateWithNoMinusSign(inputUserDateTo);
+
+    cout << inputUserDateFrom << " " << inputUserDateTo;
+    incomeManager -> showUserBalance(inputUserDateFrom, inputUserDateTo);
+    expenseManager -> showUserBalance(inputUserDateFrom, inputUserDateTo);
+    checkBalance();
 }
 
 void Budget::checkBalance(){
@@ -62,7 +52,7 @@ void Budget::checkBalance(){
     system ("pause");
 }
 
-char Budget::mainManu()
+char Budget::mainMenu()
 {
     char option;
 
@@ -79,7 +69,7 @@ char Budget::mainManu()
     return option;
 }
 
-char Budget::userManu(){
+char Budget::userMenu(){
     char option;
 
     system("cls");
@@ -117,3 +107,71 @@ void Budget::logOutUser(){
     incomeManager = NULL;
     expenseManager = NULL;
 }
+
+void Budget::showUserBalanceCurrentMonth(){
+    string originDate = SupportMetod::convertUserDateToDateWithNoMinusSign(SupportMetod::getCurrentTime()); //20190307
+    string month = "";
+    string year = "";
+    string lastDay = "";
+
+    for (int i = 0; i < 6; i++ ){
+        if (i < 4)
+            year += originDate[i];
+        else if (i >= 4 && i < 6)
+            month += originDate[i];
+    }
+    string firstDay = "01";
+    string fromDate = year + month + firstDay;
+
+    int toLastDay = SupportMetod::howManyDaysInMonth(SupportMetod::convertStringToInt(month), SupportMetod::convertStringToInt(year));
+
+    lastDay = SupportMetod::convertIntToString(toLastDay);
+
+    string toDate = year + month + lastDay;
+
+    incomeManager -> showUserBalance(fromDate, toDate);
+    expenseManager -> showUserBalance(fromDate, toDate);
+    checkBalance();
+}
+
+void Budget::showUserBalancePreviouseMonth(){
+    string originDate = SupportMetod::convertUserDateToDateWithNoMinusSign(SupportMetod::getCurrentTime()); //20190307
+    string month = "";
+    string year = "";
+    string lastDay = "";
+    int intMonth;
+    int intYear;
+
+    for (int i = 0; i < 6; i++ ){
+        if (i < 4)
+            year += originDate[i];
+        else if (i >= 4 && i < 6)
+            month += originDate[i];
+    }
+    intMonth = SupportMetod::convertStringToInt(month)-1;
+    intYear = SupportMetod::convertStringToInt(year)-1;
+
+    if (intMonth == 0){
+        intMonth = 12;
+        month = SupportMetod::convertIntToString(intMonth);
+        year = SupportMetod::convertIntToString(intYear);
+    }
+    else if (intMonth < 10 && intMonth > 0)
+        month = "0" + SupportMetod::convertIntToString(intMonth);
+    else
+        month = SupportMetod::convertIntToString(intMonth);
+
+    string firstDay = "01";
+    string fromDate = year + month + firstDay;
+
+    int toLastDay = SupportMetod::howManyDaysInMonth(SupportMetod::convertStringToInt(month), SupportMetod::convertStringToInt(year));
+
+    lastDay = SupportMetod::convertIntToString(toLastDay);
+
+    string toDate = year + month + lastDay;
+    incomeManager -> showUserBalance(fromDate, toDate);
+    expenseManager -> showUserBalance(fromDate, toDate);
+    checkBalance();
+}
+
+

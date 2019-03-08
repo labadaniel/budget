@@ -32,9 +32,7 @@ public:
         incomes = fileWithIncome.loadIncomeFromFile(ID_LOGGED_IN_USER);
     };
     void addIncome();
-    void showUserIncomesCurrentMonth();
-    void showUserIncomesPreviouseMonth();
-    void showUserIncomesFromUserPeriod(string inputUserDateFrom, string inputUserDateTo);
+    void showUserBalance(string fromDate, string toDate);
     double getSumOfIncomes();
 };
 #endif

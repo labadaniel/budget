@@ -5,6 +5,7 @@
 #include "UserManager.h"
 #include "IncomeManager.h"
 #include "ExpenseManager.h"
+#include "SupportMetod.h"
 
 
 using namespace std;
@@ -32,15 +33,13 @@ public:
     void logInUser();
     void changeLoggedUserPassword();
     void addIncome();
-    void showUserIncomesCurrentMonth();
-    void showUserIncomesPreviouseMonth();
+    void showUserBalanceCurrentMonth();
+    void showUserBalancePreviouseMonth();
     void addExpense();
-    void showUserExpensesCurrentMonth();
-    void showUserExpensesPreviouseMonth();
-    void showUserIncomesFromUserPeriod();
+    void showUserBalanceFromUserPeriod();
     void checkBalance();
-    char mainManu();
-    char userManu();
+    char mainMenu();
+    char userMenu();
     bool isUserLogedIn();
     void logOutUser();
 };
