@@ -17,11 +17,9 @@ public:
     FileWithUsers(){
         fileWithUsers = "Users.xml";
     };
-
     void addUserToFile(User user);
     vector <User> loadUserFromFile();
     void saveAllUserToFile (vector <User> &users);
-
 };
 
 #endif

@@ -15,7 +15,14 @@ class Budget
     UserManager userManager;
     IncomeManager *incomeManager;
     ExpenseManager *expenseManager;
-
+    string getFirstDateCurrentMonth();
+    string getSecondDateCurrentMonth();
+    string getFirstDatePreviouseMonth();
+    string getSecondDatePreviouseMonth();
+    string getUserDate();
+    string getFirstUserDate();
+    string getSecondUserDate();
+    void checkBalance(string fromDate, string toDate);
 
 public:
     Budget(){
@@ -28,20 +35,19 @@ public:
         incomeManager = NULL;
         expenseManager = NULL;
     }
-    void showAllUser();
+    bool isUserLogedIn();
+    char userMenu();
+    void addIncome();
+    void addExpense();
+    void showUserBalanceFromCurrentMonth();
+    void showUserBalanceFromPreviouseMonth();
+    void showUserBalanceFromUserPeriod();
+    void changeLoggedUserPassword();
+    void logOutUser();
+    char mainMenu();
     void signInUser();
     void logInUser();
-    void changeLoggedUserPassword();
-    void addIncome();
-    void showUserBalanceCurrentMonth();
-    void showUserBalancePreviouseMonth();
-    void addExpense();
-    void showUserBalanceFromUserPeriod();
-    void checkBalance();
-    char mainMenu();
-    char userMenu();
-    bool isUserLogedIn();
-    void logOutUser();
+    void showAllUser();
 };
 
 

@@ -13,7 +13,6 @@ using namespace std;
 
 class SupportMetod
 {
-
 public:
     static string getCurrentTime();
     static int convertStringToInt(string digit);
@@ -25,8 +24,6 @@ public:
     static string convertDoubleToString(double digit);
     static string getCurrentDateWithLastDayOfMonth();
     static string getCurrentDateWithFirstDayOfMonth();
-    static string getPreviouseMonthWithLastDayOfMonth();
-    static string getPreviouseMonthWithFirstDayOfMonth();
     static bool sortDateIncome (Income lhs, Income rhs);
     static bool sortDateExpense (Expense lhs, Expense rhs);
     static bool checkLastDayFromUserInputDay (string userDate);

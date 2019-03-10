@@ -18,10 +18,10 @@ int main() {
                 budget.addExpense();
                 break;
             case '3':
-                budget.showUserBalanceCurrentMonth();
+                budget.showUserBalanceFromCurrentMonth();
                 break;
             case '4':
-                budget.showUserBalancePreviouseMonth();
+                budget.showUserBalanceFromPreviouseMonth();
                 break;
             case '5':
                 budget.showUserBalanceFromUserPeriod();

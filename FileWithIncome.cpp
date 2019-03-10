@@ -18,7 +18,7 @@ void FileWithIncome::addIncomeToFile(Income income) {
     fileXml.AddElem("item", income.getItem());
     fileXml.AddElem("amount", SupportMetod::convertDoubleToString(income.getAmount()));
     fileXml.Save(fileWithIncome);
-    cout << income.getAmount();
+
     system("pause");
 }
 
