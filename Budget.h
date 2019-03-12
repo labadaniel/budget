@@ -6,7 +6,7 @@
 #include "IncomeManager.h"
 #include "ExpenseManager.h"
 #include "SupportMetod.h"
-
+#include "DateManager.h"
 
 using namespace std;
 
@@ -15,13 +15,8 @@ class Budget
     UserManager userManager;
     IncomeManager *incomeManager;
     ExpenseManager *expenseManager;
-    string getFirstDateCurrentMonth();
-    string getSecondDateCurrentMonth();
-    string getFirstDatePreviouseMonth();
-    string getSecondDatePreviouseMonth();
-    string getUserDate();
-    string getFirstUserDate();
-    string getSecondUserDate();
+    DateManager dateManager;
+
     void checkBalance(string fromDate, string toDate);
 
 public:
@@ -49,6 +44,5 @@ public:
     void logInUser();
     void showAllUser();
 };
-
 
 #endif
